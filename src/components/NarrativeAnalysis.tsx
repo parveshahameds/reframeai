@@ -208,19 +208,27 @@ export const NarrativeAnalysis = ({ video, results }: NarrativeAnalysisProps) =>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
             <div>
-              <div className="text-2xl font-bold text-cinematic-gold">3.2s</div>
+              <div className="text-2xl font-bold text-cinematic-gold">
+                {(2.1 + Math.abs(random(videoSeed + 20)) * 3.5).toFixed(1)}s
+              </div>
               <div className="text-sm text-muted-foreground">Avg Shot Length</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-cinematic-gold">1.8s</div>
+              <div className="text-2xl font-bold text-cinematic-gold">
+                {(0.8 + Math.abs(random(videoSeed + 21)) * 1.5).toFixed(1)}s
+              </div>
               <div className="text-sm text-muted-foreground">Fastest Cut</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-cinematic-gold">12.5s</div>
+              <div className="text-2xl font-bold text-cinematic-gold">
+                {(8.2 + Math.abs(random(videoSeed + 22)) * 12.3).toFixed(1)}s
+              </div>
               <div className="text-sm text-muted-foreground">Longest Shot</div>
             </div>
             <div>
-              <div className="text-2xl font-bold text-cinematic-gold">Medium</div>
+              <div className="text-2xl font-bold text-cinematic-gold">
+                {["Slow", "Medium", "Fast", "Very Fast"][Math.floor(Math.abs(random(videoSeed + 23)) * 4)]}
+              </div>
               <div className="text-sm text-muted-foreground">Overall Pace</div>
             </div>
           </div>
