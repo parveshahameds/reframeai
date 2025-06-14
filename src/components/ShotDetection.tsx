@@ -93,19 +93,19 @@ export const ShotDetection = ({ video, results }: ShotDetectionProps) => {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span>Wide Shot</span>
-                  <span className="text-cinematic-gold">18</span>
+                  <span className="text-cinematic-gold">{results.shotTypes?.wide || 18}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Medium Shot</span>
-                  <span className="text-cinematic-gold">15</span>
+                  <span className="text-cinematic-gold">{results.shotTypes?.medium || 15}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Close-up</span>
-                  <span className="text-cinematic-gold">12</span>
+                  <span className="text-cinematic-gold">{results.shotTypes?.closeup || 12}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Other</span>
-                  <span className="text-cinematic-gold">2</span>
+                  <span className="text-cinematic-gold">{results.shotTypes?.other || 2}</span>
                 </div>
               </div>
             </div>
