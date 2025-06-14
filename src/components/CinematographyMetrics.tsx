@@ -8,25 +8,29 @@ interface CinematographyMetricsProps {
 }
 
 export const CinematographyMetrics = ({ video, results }: CinematographyMetricsProps) => {
+  // Generate dynamic cinematography data based on video properties
+  const videoSeed = video.name.length + video.size;
+  const random = (seed: number) => Math.sin(seed) * 10000 - Math.floor(Math.sin(seed) * 10000);
+  
   const cinematographyData = {
     colorTemperature: {
-      warm: 65,
-      neutral: 25,
-      cool: 10
+      warm: Math.floor(40 + Math.abs(random(videoSeed + 1)) * 40), // 40-80%
+      neutral: Math.floor(15 + Math.abs(random(videoSeed + 2)) * 25), // 15-40%
+      cool: Math.floor(5 + Math.abs(random(videoSeed + 3)) * 25) // 5-30%
     },
-    contrast: 78,
-    saturation: 82,
-    brightness: 45,
+    contrast: Math.floor(60 + Math.abs(random(videoSeed + 4)) * 30), // 60-90%
+    saturation: Math.floor(70 + Math.abs(random(videoSeed + 5)) * 25), // 70-95%
+    brightness: Math.floor(30 + Math.abs(random(videoSeed + 6)) * 40), // 30-70%
     composition: {
-      ruleOfThirds: 73,
-      symmetry: 23,
-      leadingLines: 45,
-      framing: 67
+      ruleOfThirds: Math.floor(50 + Math.abs(random(videoSeed + 7)) * 40), // 50-90%
+      symmetry: Math.floor(10 + Math.abs(random(videoSeed + 8)) * 30), // 10-40%
+      leadingLines: Math.floor(30 + Math.abs(random(videoSeed + 9)) * 50), // 30-80%
+      framing: Math.floor(55 + Math.abs(random(videoSeed + 10)) * 35) // 55-90%
     },
     focusAnalysis: {
-      shallowDOF: 34,
-      deepFocus: 42,
-      rackFocus: 24
+      shallowDOF: Math.floor(20 + Math.abs(random(videoSeed + 11)) * 40), // 20-60%
+      deepFocus: Math.floor(25 + Math.abs(random(videoSeed + 12)) * 45), // 25-70%
+      rackFocus: Math.floor(10 + Math.abs(random(videoSeed + 13)) * 25) // 10-35%
     }
   };
 

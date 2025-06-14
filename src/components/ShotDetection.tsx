@@ -8,13 +8,46 @@ interface ShotDetectionProps {
 }
 
 export const ShotDetection = ({ video, results }: ShotDetectionProps) => {
-  const mockShots = [
-    { id: 1, start: "0:00", end: "0:03", type: "Wide Shot", movement: "Static", transition: "Cut" },
-    { id: 2, start: "0:03", end: "0:07", type: "Medium Shot", movement: "Pan Left", transition: "Cut" },
-    { id: 3, start: "0:07", end: "0:12", type: "Close-up", movement: "Zoom In", transition: "Fade" },
-    { id: 4, start: "0:12", end: "0:18", type: "Over Shoulder", movement: "Static", transition: "Cut" },
-    { id: 5, start: "0:18", end: "0:25", type: "Wide Shot", movement: "Tilt Up", transition: "Dissolve" },
-  ];
+  // Generate dynamic shots based on video properties
+  const videoSeed = video.name.length + video.size;
+  const random = (seed: number) => Math.sin(seed) * 10000 - Math.floor(Math.sin(seed) * 10000);
+  
+  const shotTypes = ["Wide Shot", "Medium Shot", "Close-up", "Over Shoulder", "Extreme Close-up", "Master Shot"];
+  const movements = ["Static", "Pan Left", "Pan Right", "Tilt Up", "Tilt Down", "Zoom In", "Zoom Out", "Dolly", "Handheld"];
+  const transitions = ["Cut", "Fade", "Dissolve", "Wipe", "Match Cut"];
+  
+  const generateShots = () => {
+    const totalShots = results.totalShots || 10;
+    const shots = [];
+    let currentTime = 0;
+    
+    for (let i = 1; i <= Math.min(totalShots, 8); i++) { // Show first 8 shots
+      const duration = 2 + Math.abs(random(videoSeed + i * 10)) * 6; // 2-8 second shots
+      const startTime = currentTime;
+      const endTime = currentTime + duration;
+      
+      const formatTime = (seconds: number) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs.toString().padStart(2, '0')}`;
+      };
+      
+      shots.push({
+        id: i,
+        start: formatTime(startTime),
+        end: formatTime(endTime),
+        type: shotTypes[Math.floor(Math.abs(random(videoSeed + i)) * shotTypes.length)],
+        movement: movements[Math.floor(Math.abs(random(videoSeed + i * 2)) * movements.length)],
+        transition: transitions[Math.floor(Math.abs(random(videoSeed + i * 3)) * transitions.length)]
+      });
+      
+      currentTime = endTime;
+    }
+    
+    return shots;
+  };
+  
+  const dynamicShots = generateShots();
 
   return (
     <div className="space-y-6">
@@ -55,7 +88,7 @@ export const ShotDetection = ({ video, results }: ShotDetectionProps) => {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {mockShots.map((shot) => (
+            {dynamicShots.map((shot) => (
               <div key={shot.id} className="flex items-center justify-between p-4 border rounded-lg">
                 <div className="flex items-center gap-4">
                   <div className="text-sm font-mono text-muted-foreground">

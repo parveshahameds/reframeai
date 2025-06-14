@@ -74,7 +74,11 @@ export const AnalysisDashboard = ({ video, results, onNewVideo }: AnalysisDashbo
         duration: formattedDuration,
         totalShots: totalShotsEstimate,
         avgShotLength: avgShotLength,
-        dominantColors: ["#1a1a1a", "#d4af37", "#8b4513"],
+        dominantColors: [
+          `hsl(${Math.floor(Math.abs(random(videoSeed + 20)) * 360)}, ${Math.floor(30 + Math.abs(random(videoSeed + 21)) * 40)}%, ${Math.floor(20 + Math.abs(random(videoSeed + 22)) * 30)}%)`,
+          `hsl(${Math.floor(Math.abs(random(videoSeed + 23)) * 360)}, ${Math.floor(40 + Math.abs(random(videoSeed + 24)) * 50)}%, ${Math.floor(40 + Math.abs(random(videoSeed + 25)) * 40)}%)`,
+          `hsl(${Math.floor(Math.abs(random(videoSeed + 26)) * 360)}, ${Math.floor(20 + Math.abs(random(videoSeed + 27)) * 30)}%, ${Math.floor(60 + Math.abs(random(videoSeed + 28)) * 30)}%)`
+        ],
         shotTypes: shotTypes,
         cameraMovements: {
           static: Math.floor(totalShotsEstimate * Math.abs(staticRatio)),

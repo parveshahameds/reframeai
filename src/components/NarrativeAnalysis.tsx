@@ -9,21 +9,75 @@ interface NarrativeAnalysisProps {
 }
 
 export const NarrativeAnalysis = ({ video, results }: NarrativeAnalysisProps) => {
+  // Generate dynamic narrative data based on video properties
+  const videoSeed = video.name.length + video.size;
+  const random = (seed: number) => Math.sin(seed) * 10000 - Math.floor(Math.sin(seed) * 10000);
+  
+  // Parse duration from results to calculate act timings
+  const totalDuration = results.duration || "2:34";
+  const [minutes, seconds] = totalDuration.split(':').map(Number);
+  const totalSeconds = minutes * 60 + seconds;
+  
+  const act1End = Math.floor(totalSeconds * 0.25);
+  const act2End = Math.floor(totalSeconds * 0.75);
+  
+  const formatTime = (secs: number) => {
+    const mins = Math.floor(secs / 60);
+    const seconds = secs % 60;
+    return `${mins}:${seconds.toString().padStart(2, '0')}`;
+  };
+  
   const narrativeData = {
     pacing: {
-      act1: { duration: "0:00-0:45", tempo: "Slow", tension: 25 },
-      act2: { duration: "0:45-1:45", tempo: "Medium", tension: 65 },
-      act3: { duration: "1:45-2:34", tempo: "Fast", tension: 90 }
+      act1: { 
+        duration: `0:00-${formatTime(act1End)}`, 
+        tempo: ["Slow", "Medium"][Math.floor(Math.abs(random(videoSeed + 1)) * 2)], 
+        tension: Math.floor(15 + Math.abs(random(videoSeed + 2)) * 40) // 15-55%
+      },
+      act2: { 
+        duration: `${formatTime(act1End)}-${formatTime(act2End)}`, 
+        tempo: ["Medium", "Fast"][Math.floor(Math.abs(random(videoSeed + 3)) * 2)], 
+        tension: Math.floor(50 + Math.abs(random(videoSeed + 4)) * 35) // 50-85%
+      },
+      act3: { 
+        duration: `${formatTime(act2End)}-${totalDuration}`, 
+        tempo: ["Fast", "Very Fast"][Math.floor(Math.abs(random(videoSeed + 5)) * 2)], 
+        tension: Math.floor(75 + Math.abs(random(videoSeed + 6)) * 20) // 75-95%
+      }
     },
     emotions: [
-      { emotion: "Tension", intensity: 78, timeline: ["0:30", "1:15", "2:10"] },
-      { emotion: "Relief", intensity: 45, timeline: ["0:50", "2:25"] },
-      { emotion: "Excitement", intensity: 82, timeline: ["1:30", "2:05"] }
+      { 
+        emotion: "Tension", 
+        intensity: Math.floor(60 + Math.abs(random(videoSeed + 7)) * 35), 
+        timeline: [formatTime(Math.floor(totalSeconds * 0.2)), formatTime(Math.floor(totalSeconds * 0.6)), formatTime(Math.floor(totalSeconds * 0.85))]
+      },
+      { 
+        emotion: "Relief", 
+        intensity: Math.floor(30 + Math.abs(random(videoSeed + 8)) * 40), 
+        timeline: [formatTime(Math.floor(totalSeconds * 0.35)), formatTime(Math.floor(totalSeconds * 0.9))]
+      },
+      { 
+        emotion: "Excitement", 
+        intensity: Math.floor(55 + Math.abs(random(videoSeed + 9)) * 40), 
+        timeline: [formatTime(Math.floor(totalSeconds * 0.45)), formatTime(Math.floor(totalSeconds * 0.75))]
+      }
     ],
     characters: [
-      { name: "Protagonist", screenTime: "85%", scenes: 12 },
-      { name: "Antagonist", screenTime: "45%", scenes: 7 },
-      { name: "Supporting", screenTime: "30%", scenes: 5 }
+      { 
+        name: "Protagonist", 
+        screenTime: `${Math.floor(70 + Math.abs(random(videoSeed + 10)) * 25)}%`, 
+        scenes: Math.floor(8 + Math.abs(random(videoSeed + 11)) * 8) 
+      },
+      { 
+        name: "Antagonist", 
+        screenTime: `${Math.floor(25 + Math.abs(random(videoSeed + 12)) * 35)}%`, 
+        scenes: Math.floor(3 + Math.abs(random(videoSeed + 13)) * 6) 
+      },
+      { 
+        name: "Supporting", 
+        screenTime: `${Math.floor(15 + Math.abs(random(videoSeed + 14)) * 25)}%`, 
+        scenes: Math.floor(2 + Math.abs(random(videoSeed + 15)) * 5) 
+      }
     ]
   };
 
