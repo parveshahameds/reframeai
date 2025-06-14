@@ -116,6 +116,26 @@ export const AnalysisDashboard = ({ video, results, onNewVideo }: AnalysisDashbo
           </TabsList>
 
           <TabsContent value="overview" className="space-y-6">
+            {/* Inspiration Banner */}
+            <Card className="bg-gradient-to-r from-cinematic-gold/10 to-transparent border-cinematic-gold/30">
+              <CardContent className="p-6">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 bg-cinematic-gold rounded-full flex items-center justify-center">
+                    <Film className="w-6 h-6 text-cinematic-black" />
+                  </div>
+                  <div>
+                    <h3 className="font-cinematic text-lg font-semibold text-cinematic-gold mb-1">
+                      Cinematography Insights
+                    </h3>
+                    <p className="text-muted-foreground">
+                      Your footage shows techniques similar to works by Emmanuel Lubezki in "The Revenant" 
+                      - natural lighting and fluid camera movement create immersive storytelling.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -165,31 +185,70 @@ export const AnalysisDashboard = ({ video, results, onNewVideo }: AnalysisDashbo
               </Card>
             </div>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Narrative Structure</CardTitle>
-                <CardDescription>
-                  AI-detected story beats and pacing analysis
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  {mockResults.narrativeBeats.map((beat, i) => (
-                    <div key={i} className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Badge variant="outline">{beat.time}</Badge>
-                        <span className="font-medium">{beat.type}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <div className="text-sm text-muted-foreground">
-                          {Math.round(beat.confidence * 100)}% confidence
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Narrative Structure</CardTitle>
+                  <CardDescription>
+                    AI-detected story beats following classical three-act structure
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    {mockResults.narrativeBeats.map((beat, i) => (
+                      <div key={i} className="flex items-center justify-between p-3 rounded-lg bg-card/50">
+                        <div className="flex items-center gap-3">
+                          <Badge variant="outline">{beat.time}</Badge>
+                          <span className="font-medium">{beat.type}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <div className="text-sm text-muted-foreground">
+                            {Math.round(beat.confidence * 100)}% confidence
+                          </div>
                         </div>
                       </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Camera className="w-5 h-5" />
+                    Master's Technique
+                  </CardTitle>
+                  <CardDescription>
+                    Learn from legendary cinematographers
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="p-4 bg-cinematic-gold/5 rounded-lg border border-cinematic-gold/20">
+                    <h4 className="font-semibold text-cinematic-gold mb-2">Similar to "Blade Runner 2049"</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Your color grading and composition echo Roger Deakins' work - using warm/cool contrast 
+                      to enhance the emotional narrative.
+                    </p>
+                    <div className="flex gap-2">
+                      <Badge className="bg-cinematic-gold text-cinematic-black">Color Theory</Badge>
+                      <Badge variant="outline">Composition</Badge>
                     </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                  </div>
+                  
+                  <div className="p-4 bg-cinematic-gold/5 rounded-lg border border-cinematic-gold/20">
+                    <h4 className="font-semibold text-cinematic-gold mb-2">Kubrick's Symmetry</h4>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Your framing shows influence from "The Shining" - perfect symmetry creates 
+                      psychological tension and visual harmony.
+                    </p>
+                    <div className="flex gap-2">
+                      <Badge className="bg-cinematic-gold text-cinematic-black">Framing</Badge>
+                      <Badge variant="outline">Psychology</Badge>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </TabsContent>
 
           <TabsContent value="shots">
