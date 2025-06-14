@@ -1,21 +1,26 @@
 import { Navigation } from "@/components/Navigation";
-import { Hero } from "@/components/Hero";
-import { About } from "@/components/About";
-import { Skills } from "@/components/Skills";
-import { Projects } from "@/components/Projects";
-import { Experience } from "@/components/Experience";
-import { Contact } from "@/components/Contact";
+import { VideoUpload } from "@/components/VideoUpload";
+import { AnalysisDashboard } from "@/components/AnalysisDashboard";
+import { useState } from "react";
 
 const Index = () => {
+  const [currentVideo, setCurrentVideo] = useState<File | null>(null);
+  const [analysisResults, setAnalysisResults] = useState(null);
+
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Experience />
-      <Contact />
+      <div className="pt-20">
+        {!currentVideo ? (
+          <VideoUpload onVideoSelect={setCurrentVideo} />
+        ) : (
+          <AnalysisDashboard 
+            video={currentVideo} 
+            results={analysisResults}
+            onNewVideo={() => setCurrentVideo(null)}
+          />
+        )}
+      </div>
     </div>
   );
 };

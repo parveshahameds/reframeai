@@ -15,11 +15,11 @@ export const Navigation = () => {
   }, []);
 
   const navItems = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Experience", href: "#experience" },
-    { name: "Contact", href: "#contact" }
+    { name: "Upload", href: "#upload" },
+    { name: "Analysis", href: "#analysis" },
+    { name: "Shots", href: "#shots" },
+    { name: "Narrative", href: "#narrative" },
+    { name: "Export", href: "#export" }
   ];
 
   return (
@@ -33,7 +33,7 @@ export const Navigation = () => {
             <div className="p-2 bg-cinematic-gold rounded-lg">
               <Film className="w-6 h-6 text-cinematic-black" />
             </div>
-            <span className="font-cinematic font-bold text-xl text-foreground">FilmAI</span>
+            <span className="font-cinematic font-bold text-xl text-foreground">Film Analysis AI</span>
           </div>
 
           {/* Desktop Navigation */}
