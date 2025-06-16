@@ -22,7 +22,7 @@ export const Navigation = () => {
             <div className="p-2 bg-cinematic-gold rounded-lg">
               <Film className="w-6 h-6 text-cinematic-black" />
             </div>
-            <span className="font-cinematic font-bold text-xl text-foreground">Reframe</span>
+            <span className="font-cinematic font-bold text-xl text-foreground">Reframe AI</span>
           </div>
         </div>
       </div>
